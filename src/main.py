@@ -26,8 +26,13 @@ def recognize_model(image: str, model: Any):
 
 
 if __name__ == "__main__":
-    logger = logging.getLogger('')
-    logger.setLevel(logging.INFO)
+    logging.basicConfig(level=logging.INFO)
+    logger = logging.getLogger('detector')
+
     logger.info('running in local environment')
 
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='models/mower.pt', force_reload=True)
+
+    mower_coordinates = recognize_model('./test_file.jpg', model)
+
+    logger.info(mower_coordinates)
